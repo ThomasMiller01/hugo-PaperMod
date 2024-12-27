@@ -3,8 +3,15 @@
     <header class="entry-header">
         <h1>{{ .Title | markdownify }}</h1>
     </header>
-    <div class="entry-content">
-        {{ .Content | markdownify }}
+    <div class="home-info-container">
+        {{- if .image.url}}
+        <img draggable="false" src="{{ .image.url | absURL }}" alt="{{ .image.title | default " profile image" }}"
+            title="{{ .image.title }}" height="{{ .image.height | default 150 }}"
+            width="{{ .image.width | default 150 }}" />
+        {{- end}}
+        <div class="entry-content">
+            {{ .Content | markdownify }}
+        </div>
     </div>
     <footer class="entry-footer">
         {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
